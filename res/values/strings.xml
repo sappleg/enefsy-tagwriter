@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Enefsy TagWriter</string>
+    <string name="console_card">Console card</string>
+    <string name="write_a_new_tag">Click to write a new tag</string>
+    <string name="write_uid">Enter Unique ID</string>
+</resources>

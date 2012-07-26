@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center" 
+    android:padding="25dp"
+    >
+    
+	<EditText
+	    android:id="@+id/et_uid"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" 
+    	android:hint="@string/write_uid" />
+	
+    <Button
+        android:id="@+id/write_tag_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/write_a_new_tag"
+        android:layout_marginBottom="15dp"
+        android:padding="25dp"
+        android:textSize="25sp"
+        />
+    
+    <TextView 
+        android:id="@+id/text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        />
+</LinearLayout>
