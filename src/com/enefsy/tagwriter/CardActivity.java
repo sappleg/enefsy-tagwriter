@@ -24,7 +24,7 @@ public class CardActivity extends Activity {
         
         // see if app was started from a tag and show game console
         Intent intent = getIntent();
-        if(intent.getType() != null && intent.getType().equals(MimeType.NFC_DEMO)) {
+        if(intent.getType() != null && intent.getType().equals(MimeType.NFC_UID)) {
         	Parcelable[] rawMsgs = getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage msg = (NdefMessage) rawMsgs[0];
             NdefRecord cardRecord = msg.getRecords()[0];

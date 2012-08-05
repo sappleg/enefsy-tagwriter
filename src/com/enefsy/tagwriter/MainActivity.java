@@ -106,7 +106,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		// record that contains our custom "retro console" game data, using custom MIME_TYPE
 //		String hello = "hello";
 		byte[] payload = getUID().getBytes();
-		byte[] mimeBytes = MimeType.NFC_DEMO.getBytes(Charset.forName("US-ASCII"));
+		byte[] mimeBytes = MimeType.NFC_UID.getBytes(Charset.forName("US-ASCII"));
         NdefRecord cardRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, mimeBytes, 
         										new byte[0], payload);
 		NdefMessage message = new NdefMessage(new NdefRecord[] { cardRecord, appRecord});
