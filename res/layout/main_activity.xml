@@ -13,6 +13,13 @@
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content" 
     	android:hint="@string/write_uid" />
+ 
+    <ToggleButton
+        android:id="@+id/toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/toggle_off" 
+        android:checked="false" />
 	
     <Button
         android:id="@+id/write_tag_button"

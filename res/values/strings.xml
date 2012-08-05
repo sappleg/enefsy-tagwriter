@@ -4,4 +4,7 @@
     <string name="console_card">Console card</string>
     <string name="write_a_new_tag">Click to write a new tag</string>
     <string name="write_uid">Enter Unique ID</string>
+    <string name="toggle_on">Read-Only</string>
+    <string name="toggle_off">Read/Write</string>
+    <string name="btn_display">Display</string>
 </resources>

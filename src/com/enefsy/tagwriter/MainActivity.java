@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 /**
  * Retro console "collectable cards/top trumps" NFC demo
@@ -32,6 +33,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button mWriteTagButton;
 	private TextView mTextView;
 	private EditText UID_Et;
+	private ToggleButton t;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,9 @@ public class MainActivity extends Activity implements OnClickListener {
         // button that starts the tag-write procedure
         mWriteTagButton = (Button)findViewById(R.id.write_tag_button);
         mWriteTagButton.setOnClickListener(this);
+        
+        // Button to determine if read/write capable or read-only tag
+        t = (ToggleButton) findViewById(R.id.toggle);;
         
         // TextView that we'll use to output messages to screen
         mTextView = (TextView)findViewById(R.id.text_view);
@@ -110,7 +115,8 @@ public class MainActivity extends Activity implements OnClickListener {
         NdefRecord cardRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, mimeBytes, 
         										new byte[0], payload);
 		NdefMessage message = new NdefMessage(new NdefRecord[] { cardRecord, appRecord});
-        
+		
+		
 		try {
 			// see if tag is already NDEF formatted
 			Ndef ndef = Ndef.get(tag);
@@ -129,8 +135,17 @@ public class MainActivity extends Activity implements OnClickListener {
 					return false;
 				}
 
-				ndef.writeNdefMessage(message);
-				displayMessage("Tag written successfully\nClose this app and scan tag");
+				ndef.writeNdefMessage(message);				
+				if (t.isChecked()) {
+					if (!ndef.makeReadOnly()) {
+						displayMessage("Tag cannot be made read-only");
+						return false;
+					} else {
+						displayMessage("Tag written successfully (Read-Only mode)\nClose this app and scan tag");
+					}
+				} else {
+					displayMessage("Tag written successfully\nClose this app and scan tag");
+				}
 				return true;
 			} else {
 				// attempt to format tag
@@ -138,8 +153,13 @@ public class MainActivity extends Activity implements OnClickListener {
 				if (format != null) {
 					try {
 						format.connect();
-						format.format(message);
-						displayMessage("Tag written successfully\nClose this app and scan tag");
+						if (t.isChecked()) {
+							format.formatReadOnly(message);
+							displayMessage("Tag written successfully (Read-Only mode)\nClose this app and scan tag");
+						} else {
+							format.format(message);
+							displayMessage("Tag written successfully\nClose this app and scan tag");
+						}
 						return true;
 					} catch (IOException e) {
 						displayMessage("Unable to format tag to NDEF.");
